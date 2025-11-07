@@ -2,6 +2,7 @@
 This file is inspired by the code provided by the author of https://arxiv.org/abs/2406.11473
 '''
 import torch
+import torchsnooper
 import re
 from pathlib import Path
 import random
@@ -43,9 +44,10 @@ class MDLMEvalHarness(LM):
             greddy=False,
             cfg=0.,
             device="cuda",
+            steps=128,
     ):
         super().__init__()
-        assert nll_type in ['mc', 'chain_rule']
+        assert nll_type in ['mc', 'chain_rule', 'topk']
 
         model_name = f'Diff_LLaMA_{model_name}M'
         config = Config.from_name(model_name)
@@ -68,6 +70,7 @@ class MDLMEvalHarness(LM):
 
         self.cfg = cfg
         self.device = torch.device(device)
+        self.steps = steps
 
     def _forward_process(self, batch):
         b, l = batch.shape
@@ -173,6 +176,123 @@ class MDLMEvalHarness(LM):
             loss_acc.append(loss.cpu())
 
         return sum(loss_acc) / len(loss_acc)
+    
+    
+    @torch.no_grad()
+    # @torchsnooper.snoop()
+    def _eval_target_nll_topk(self, prefix, target):
+        """Evaluate the negative log likelihood using top-k sampling."""
+        prefix_len, target_len = len(prefix), len(target)
+        x = torch.concatenate([prefix, target])[None, :]
+        batch_size, _ = x.shape
+        
+        # Initialize z_T with all mask tokens
+        z = torch.full_like(x, self.mask_id, device=self.device)
+        
+        # Track accumulated log probability
+        log_probs = torch.zeros(batch_size, device=self.device)
+        
+        # Reverse diffusion: t = T down to 1
+        for t in reversed(range(1, self.steps + 1)):
+            # Check remaining masked tokens
+            num_masked = (z[0, prefix_len:] == self.mask_id).sum().item()
+            if num_masked == 0:
+                break # All tokens unmasked - we're done!
+            
+            # Determine number of tokens to unmask at this step
+            if t > 1:
+                k = max(1, target_len // self.steps)
+                k = min(k, num_masked)  # Ensure we don't unmask more than available
+            else: # Unmask all remaining tokens at the final step
+                k = (z[0, prefix_len:] == self.mask_id).sum().item()
+                
+            if k == 0:
+                continue
+
+            z, step_log_probs, _ = self._reverse_transition_topk_probability(
+                z_t=z, 
+                x=x, 
+                k=k, 
+                prefix_len=prefix_len,
+            )
+            log_probs += step_log_probs
+        
+        return log_probs.cpu()
+            
+    @torch.no_grad()
+    def _reverse_transition_topk_probability(
+        self,
+        z_t: torch.Tensor,
+        x: torch.Tensor,
+        k: int,
+        prefix_len: int
+    ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+        """Compute one reverse step under top-k strategy.
+        
+        Returns:
+            z_t_minus_1: [batch_size, seq_len] - next state
+            log_probs: [batch_size] - log p_θ(z_{t-1} | z_t)
+            selected_positions: [batch_size, k] - which positions were unmasked
+        """
+        batch_size, seq_len = x.shape
+        prompt_index = torch.arange(seq_len, device=self.device) < prefix_len
+        
+        # PREDICT: Get model probabilities
+        logits = self.get_logits(z_t, prompt_index)
+        target_logits = logits[:, prefix_len:, :]
+        target_z_t = z_t[:, prefix_len:]
+        probs = F.softmax(target_logits, dim=-1)
+        
+        # SELECT: Top-k positions by confidence            
+        confidence, _ = torch.max(probs, dim=-1)
+        top_k_indicies = self._topk_select_positions(
+            confidence=confidence,
+            z_t=target_z_t, 
+            k=k,
+        )
+        
+        # UNMASK: Update selected positions to target values
+        z_t_minus_1 = z_t.clone()
+        log_probs = torch.zeros(batch_size, device=z_t.device)
+        
+        for b in range(batch_size):
+            for idx in top_k_indicies[b]:
+                token = x[b, prefix_len + idx]
+                z_t_minus_1[b, prefix_len + idx] = token
+                log_prob = torch.log(probs[b, idx, token] + 1e-10)
+                log_probs[b] += log_prob
+
+        return z_t_minus_1, log_probs, top_k_indicies
+    
+    def _topk_select_positions(
+        self, 
+        confidence: torch.Tensor, 
+        z_t: torch.tensor, 
+        k: int, 
+    ) -> torch.Tensor:
+        """
+        Deterministically select top-k masked positions by confidence.
+        
+        Math:
+            confidence c_ℓ = max_v P_{ℓ,v}
+            U = argmax^(k) {c_ℓ : z_t^(ℓ) = mask}
+        
+        Args:
+            confidence: [batch_size, seq_len] - confidence scores
+            z_t: [batch_size, seq_len] - current state
+            k: Number of positions to select
+            
+        Assumptions:
+            k ≤ number of masked positions (guaranteed by schedule)
+            All batch elements have same masking pattern
+        
+        Returns:
+            top_k_indices: [batch_size, k] - indices of top-k positions
+        """
+        confidence_masked = confidence.clone()
+        confidence_masked[z_t != self.mask_id] = float('-inf') # ensure we don't select already-unmasked positions
+        _, top_k_indices = torch.topk(confidence_masked, k=k, dim=1)
+        return top_k_indices  # [batch_size, k]
 
     @torch.no_grad()
     def suffix_greedy_prediction(self, prefix, target):
@@ -242,6 +362,8 @@ class MDLMEvalHarness(LM):
                     ll = -self._eval_target_nll_mc(prefix, target)
                 elif self.nll_type == 'chain_rule':
                     ll = -self._eval_target_nll_ar(prefix, target)
+                elif self.nll_type == 'topk':
+                    ll = -self._eval_target_nll_topk(prefix, target)
                 else:
                     raise NotImplementedError(self.nll_type)
 

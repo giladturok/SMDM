@@ -48,7 +48,7 @@ model_para_config = {
 }
 
 # Hyperparameters
-num_of_devices = 8
+num_of_devices = 1 # prev 8
 global_batch_size = int(args.batch_size / args.nodes_num)
 learning_rate = 2e-4
 if args.model <= 20:
@@ -114,9 +114,9 @@ def forward_process(batch, total_dim=32000, eps=1e-3):
 
 
 def setup(
-    devices: int = 8,
-    train_data_dir: Path = Path("/dataset/slim_star_combined"),
-    val_data_dir: Path = Path("/dataset/slim_star_combined"),
+    devices: int = 1, # prev 8
+    train_data_dir: Path = Path("/dataset/slim_star_combined/validated"),
+    val_data_dir: Path = Path("/dataset/slim_star_combined/validated"),
     precision: Optional[str] = None,
     tpu: bool = False,
     resume: Union[bool, Path] = True,
@@ -404,15 +404,15 @@ def create_dataloaders(
 ) -> Tuple[DataLoader, DataLoader]:
     # Increase by one because we need the next word as well
     effective_block_size = block_size + 1
-    train_dataloader = create_dataloader(
-        batch_size=batch_size,
-        block_size=effective_block_size,
-        fabric=fabric,
-        data_dir=train_data_dir,
-        shuffle=True,
-        seed=seed,
-        split="train"
-    )
+    # train_dataloader = create_dataloader(
+    #     batch_size=batch_size,
+    #     block_size=effective_block_size,
+    #     fabric=fabric,
+    #     data_dir=train_data_dir,
+    #     shuffle=True,
+    #     seed=seed,
+    #     split="train"
+    # )
     val_dataloader = (
         create_dataloader(
             batch_size=batch_size,
@@ -426,7 +426,8 @@ def create_dataloaders(
         if val_data_dir
         else None
     )
-    return train_dataloader, val_dataloader
+    # return train_dataloader, val_dataloader
+    return val_dataloader, val_dataloader
 
 
 # learning rate decay scheduler (cosine with warmup)
