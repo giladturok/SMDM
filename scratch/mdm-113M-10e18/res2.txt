@@ -1,0 +1,55 @@
+A newer version of lightning is available (2.5.6). Would you like to upgrade? [Y/n]: Outputs will be saved to models/mdm_safetensors/mdm-113M-10e18
+{'model_name': 'Diff_LLaMA_113M', 'num_of_devices': 1, 'global_batch_size': 256, 'learning_rate': 0.0002, 'micro_batch_size': 8, 'max_step': 28066, 'warmup_steps': 280, 'log_step_interval': 10, 'eval_iters': 400, 'save_step_interval': 5000, 'eval_step_interval': 999999999999, 'weight_decay': 0.1, 'beta1': 0.9, 'beta2': 0.95, 'grad_clip': 1.0, 'decay_lr': True, 'min_lr': 2e-05, 'batch_size': 256, 'gradient_accumulation_steps': 32, 'warmup_iters': 8960, 'max_iters': 898112, 'lr_decay_iters': 898112, 'log_iter_interval': 320}
+Creating dataset from 252 files at data/slim_pajama/tokenized with prefix validation for split validation
+Loading model with {'org': 'Lightning-AI', 'name': 'Diff_LLaMA_113M', 'block_size': 2048, 'vocab_size': 32000, 'padding_multiple': 64, 'padded_vocab_size': 32000, 'n_layer': 12, 'n_head': 12, 'n_embd': 768, 'rotary_percentage': 1.0, 'parallel_residual': False, 'bias': False, 'n_query_groups': 12, 'shared_attention_norm': False, '_norm_class': 'FusedRMSNorm', 'norm_eps': 1e-05, '_mlp_class': 'LLaMAMLP', 'intermediate_size': 3072, 'condense_ratio': 1}
+Time to instantiate model: 0.18 seconds.
+Total parameters 162,418,176
+Loading checkpoint from models/mdm_safetensors/mdm-113M-10e18/mdm-113M-10e18.safetensors
+Validating ...
+Val iter 0000:	NLL Bound 3.8466,	NLL Uniform 3.6569,	NLL Greedy 3.2875	NLL Block Greedy 3.4746	Counted Samples 1.0
+Val iter 0001:	NLL Bound 3.7401,	NLL Uniform 3.6203,	NLL Greedy 3.2823	NLL Block Greedy 3.4455	Counted Samples 2.0
+Val iter 0002:	NLL Bound 3.7645,	NLL Uniform 3.6838,	NLL Greedy 3.3715	NLL Block Greedy 3.5105	Counted Samples 3.0
+Val iter 0003:	NLL Bound 3.6400,	NLL Uniform 3.6007,	NLL Greedy 3.2879	NLL Block Greedy 3.4233	Counted Samples 4.0
+Val iter 0004:	NLL Bound 3.6366,	NLL Uniform 3.5567,	NLL Greedy 3.2661	NLL Block Greedy 3.3837	Counted Samples 5.0
+Val iter 0005:	NLL Bound 3.5976,	NLL Uniform 3.5121,	NLL Greedy 3.2154	NLL Block Greedy 3.3335	Counted Samples 6.0
+Val iter 0006:	NLL Bound 3.5357,	NLL Uniform 3.4969,	NLL Greedy 3.1920	NLL Block Greedy 3.3173	Counted Samples 7.0
+Val iter 0007:	NLL Bound 3.4843,	NLL Uniform 3.4434,	NLL Greedy 3.1172	NLL Block Greedy 3.2556	Counted Samples 8.0
+Val iter 0008:	NLL Bound 3.4470,	NLL Uniform 3.4152,	NLL Greedy 3.0822	NLL Block Greedy 3.2115	Counted Samples 9.0
+Val iter 0009:	NLL Bound 3.4323,	NLL Uniform 3.4078,	NLL Greedy 3.0649	NLL Block Greedy 3.1990	Counted Samples 10.0
+Val iter 0010:	NLL Bound 3.4546,	NLL Uniform 3.4169,	NLL Greedy 3.0708	NLL Block Greedy 3.2108	Counted Samples 11.0
+Val iter 0011:	NLL Bound 3.4527,	NLL Uniform 3.4192,	NLL Greedy 3.0708	NLL Block Greedy 3.2164	Counted Samples 12.0
+Val iter 0012:	NLL Bound 3.4650,	NLL Uniform 3.4242,	NLL Greedy 3.0747	NLL Block Greedy 3.2234	Counted Samples 13.0
+Val iter 0013:	NLL Bound 3.4955,	NLL Uniform 3.4360,	NLL Greedy 3.0855	NLL Block Greedy 3.2387	Counted Samples 14.0
+Val iter 0014:	NLL Bound 3.5268,	NLL Uniform 3.4568,	NLL Greedy 3.1069	NLL Block Greedy 3.2632	Counted Samples 15.0
+Val iter 0015:	NLL Bound 3.5495,	NLL Uniform 3.4751,	NLL Greedy 3.1336	NLL Block Greedy 3.2858	Counted Samples 16.0
+Val iter 0016:	NLL Bound 3.5430,	NLL Uniform 3.4831,	NLL Greedy 3.1416	NLL Block Greedy 3.2949	Counted Samples 17.0
+Val iter 0017:	NLL Bound 3.5217,	NLL Uniform 3.4813,	NLL Greedy 3.1387	NLL Block Greedy 3.2939	Counted Samples 18.0
+Val iter 0018:	NLL Bound 3.5222,	NLL Uniform 3.4908,	NLL Greedy 3.1512	NLL Block Greedy 3.3064	Counted Samples 19.0
+Val iter 0019:	NLL Bound 3.5375,	NLL Uniform 3.5112,	NLL Greedy 3.1713	NLL Block Greedy 3.3282	Counted Samples 20.0
+Val iter 0020:	NLL Bound 3.5242,	NLL Uniform 3.5030,	NLL Greedy 3.1601	NLL Block Greedy 3.3173	Counted Samples 21.0
+Val iter 0021:	NLL Bound 3.5301,	NLL Uniform 3.5038,	NLL Greedy 3.1611	NLL Block Greedy 3.3172	Counted Samples 22.0
+Val iter 0022:	NLL Bound 3.5351,	NLL Uniform 3.5095,	NLL Greedy 3.1691	NLL Block Greedy 3.3231	Counted Samples 23.0
+Val iter 0023:	NLL Bound 3.5181,	NLL Uniform 3.4979,	NLL Greedy 3.1555	NLL Block Greedy 3.3088	Counted Samples 24.0
+Val iter 0024:	NLL Bound 3.5147,	NLL Uniform 3.4907,	NLL Greedy 3.1483	NLL Block Greedy 3.3009	Counted Samples 25.0
+Val iter 0025:	NLL Bound 3.5225,	NLL Uniform 3.4900,	NLL Greedy 3.1505	NLL Block Greedy 3.3012	Counted Samples 26.0
+Val iter 0026:	NLL Bound 3.5298,	NLL Uniform 3.4963,	NLL Greedy 3.1588	NLL Block Greedy 3.3094	Counted Samples 27.0
+Val iter 0027:	NLL Bound 3.5326,	NLL Uniform 3.4988,	NLL Greedy 3.1635	NLL Block Greedy 3.3136	Counted Samples 28.0
+Val iter 0028:	NLL Bound 3.5267,	NLL Uniform 3.4938,	NLL Greedy 3.1586	NLL Block Greedy 3.3095	Counted Samples 29.0
+Val iter 0029:	NLL Bound 3.5289,	NLL Uniform 3.4957,	NLL Greedy 3.1608	NLL Block Greedy 3.3122	Counted Samples 30.0
+Val iter 0030:	NLL Bound 3.5260,	NLL Uniform 3.4991,	NLL Greedy 3.1675	NLL Block Greedy 3.3167	Counted Samples 31.0
+Val iter 0031:	NLL Bound 3.5253,	NLL Uniform 3.4963,	NLL Greedy 3.1666	NLL Block Greedy 3.3141	Counted Samples 32.0
+Val iter 0032:	NLL Bound 3.5232,	NLL Uniform 3.5009,	NLL Greedy 3.1719	NLL Block Greedy 3.3203	Counted Samples 33.0
+Val iter 0033:	NLL Bound 3.5265,	NLL Uniform 3.5026,	NLL Greedy 3.1736	NLL Block Greedy 3.3216	Counted Samples 34.0
+Val iter 0034:	NLL Bound 3.5286,	NLL Uniform 3.5041,	NLL Greedy 3.1747	NLL Block Greedy 3.3227	Counted Samples 35.0
+Val iter 0035:	NLL Bound 3.5341,	NLL Uniform 3.5055,	NLL Greedy 3.1771	NLL Block Greedy 3.3251	Counted Samples 36.0
+Val iter 0036:	NLL Bound 3.5266,	NLL Uniform 3.5012,	NLL Greedy 3.1717	NLL Block Greedy 3.3202	Counted Samples 37.0
+Val iter 0037:	NLL Bound 3.5263,	NLL Uniform 3.4997,	NLL Greedy 3.1690	NLL Block Greedy 3.3181	Counted Samples 38.0
+Val iter 0038:	NLL Bound 3.5061,	NLL Uniform 3.4820,	NLL Greedy 3.1494	NLL Block Greedy 3.2994	Counted Samples 39.0
+Val iter 0039:	NLL Bound 3.4993,	NLL Uniform 3.4748,	NLL Greedy 3.1399	NLL Block Greedy 3.2916	Counted Samples 40.0
+Val iter 0040:	NLL Bound 3.4843,	NLL Uniform 3.4595,	NLL Greedy 3.1230	NLL Block Greedy 3.2749	Counted Samples 41.0
+Val iter 0041:	NLL Bound 3.4798,	NLL Uniform 3.4496,	NLL Greedy 3.1116	NLL Block Greedy 3.2644	Counted Samples 42.0
+Val iter 0042:	NLL Bound 3.4725,	NLL Uniform 3.4478,	NLL Greedy 3.1104	NLL Block Greedy 3.2621	Counted Samples 43.0
+Val iter 0043:	NLL Bound 3.4702,	NLL Uniform 3.4483,	NLL Greedy 3.1118	NLL Block Greedy 3.2625	Counted Samples 44.0
+Val iter 0044:	NLL Bound 3.4717,	NLL Uniform 3.4490,	NLL Greedy 3.1113	NLL Block Greedy 3.2628	Counted Samples 45.0
+Val iter 0045:	NLL Bound 3.4736,	NLL Uniform 3.4506,	NLL Greedy 3.1123	NLL Block Greedy 3.2640	Counted Samples 46.0
+Val iter 0046:	NLL Bound 3.4673,	NLL Uniform 3.4442,	NLL Greedy 3.1058	NLL Block Greedy 3.2567	Counted Samples 47.0

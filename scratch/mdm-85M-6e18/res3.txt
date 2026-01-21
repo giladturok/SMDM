@@ -1,0 +1,14 @@
+A newer version of lightning is available (2.5.6). Would you like to upgrade? [Y/n]: Outputs will be saved to models/mdm_safetensors/mdm-85M-6e18
+{'model_name': 'Diff_LLaMA_85M', 'num_of_devices': 1, 'global_batch_size': 256, 'learning_rate': 0.0002, 'micro_batch_size': 8, 'max_step': 22383, 'warmup_steps': 223, 'log_step_interval': 10, 'eval_iters': 400, 'save_step_interval': 5000, 'eval_step_interval': 999999999999, 'weight_decay': 0.1, 'beta1': 0.9, 'beta2': 0.95, 'grad_clip': 1.0, 'decay_lr': True, 'min_lr': 2e-05, 'batch_size': 256, 'gradient_accumulation_steps': 32, 'warmup_iters': 7136, 'max_iters': 716256, 'lr_decay_iters': 716256, 'log_iter_interval': 320}
+Creating dataset from 252 files at data/slim_pajama/tokenized with prefix validation for split validation
+Loading model with {'org': 'Lightning-AI', 'name': 'Diff_LLaMA_85M', 'block_size': 2048, 'vocab_size': 32000, 'padding_multiple': 64, 'padded_vocab_size': 32000, 'n_layer': 13, 'n_head': 10, 'n_embd': 640, 'rotary_percentage': 1.0, 'parallel_residual': False, 'bias': False, 'n_query_groups': 10, 'shared_attention_norm': False, '_norm_class': 'FusedRMSNorm', 'norm_eps': 1e-05, '_mlp_class': 'LLaMAMLP', 'intermediate_size': 2560, 'condense_ratio': 1}
+Time to instantiate model: 0.23 seconds.
+Total parameters 126,174,720
+Loading checkpoint from models/mdm_safetensors/mdm-85M-6e18/mdm-85M-6e18.safetensors
+Validating ...
+Val iter 0000:	NLL Uniform 3.5861,	NLL Greedy 3.5364	NLL Block Greedy 3.5365	NLL Probability Margin 3.5514	NLL Greedy Cheating 3.2422	Counted Samples 16.0
+Val iter 0001:	NLL Uniform 3.6086,	NLL Greedy 3.5628	NLL Block Greedy 3.5624	NLL Probability Margin 3.5793	NLL Greedy Cheating 3.2777	Counted Samples 32.0
+Val iter 0002:	NLL Uniform 3.5551,	NLL Greedy 3.5070	NLL Block Greedy 3.5073	NLL Probability Margin 3.5234	NLL Greedy Cheating 3.2233	Counted Samples 48.0
+Val iter 0003:	NLL Uniform 3.5356,	NLL Greedy 3.4881	NLL Block Greedy 3.4891	NLL Probability Margin 3.5062	NLL Greedy Cheating 3.1988	Counted Samples 64.0
+Val iter 0004:	NLL Uniform 3.5055,	NLL Greedy 3.4586	NLL Block Greedy 3.4581	NLL Probability Margin 3.4759	NLL Greedy Cheating 3.1681	Counted Samples 80.0
+Val iter 0005:	NLL Uniform 3.5287,	NLL Greedy 3.4802	NLL Block Greedy 3.4811	NLL Probability Margin 3.4991	NLL Greedy Cheating 3.1881	Counted Samples 96.0

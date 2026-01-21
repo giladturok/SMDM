@@ -1,0 +1,9 @@
+A newer version of lightning is available (2.5.5). Would you like to upgrade? [Y/n]: Outputs will be saved to models/mdm_safetensors/mdm-472M-100e18
+{'model_name': 'Diff_LLaMA_472M', 'num_of_devices': 1, 'global_batch_size': 256, 'learning_rate': 0.0002, 'micro_batch_size': 8, 'max_step': 67363, 'warmup_steps': 673, 'log_step_interval': 10, 'eval_iters': 400, 'save_step_interval': 5000, 'eval_step_interval': 999999999999, 'weight_decay': 0.1, 'beta1': 0.9, 'beta2': 0.95, 'grad_clip': 1.0, 'decay_lr': True, 'min_lr': 2e-05, 'batch_size': 256, 'gradient_accumulation_steps': 32, 'warmup_iters': 21536, 'max_iters': 2155616, 'lr_decay_iters': 2155616, 'log_iter_interval': 320}
+Creating dataset from 252 files at data/slim_pajama/tokenized with prefix validation for split validation
+Loading model with {'org': 'Lightning-AI', 'name': 'Diff_LLaMA_472M', 'block_size': 2048, 'vocab_size': 32000, 'padding_multiple': 64, 'padded_vocab_size': 32000, 'n_layer': 18, 'n_head': 10, 'n_embd': 1280, 'rotary_percentage': 1.0, 'parallel_residual': False, 'bias': False, 'n_query_groups': 10, 'shared_attention_norm': False, '_norm_class': 'FusedRMSNorm', 'norm_eps': 1e-05, '_mlp_class': 'LLaMAMLP', 'intermediate_size': 5120, 'condense_ratio': 1}
+Time to instantiate model: 0.21 seconds.
+Total parameters 553,827,840
+Loading checkpoint from models/mdm_safetensors/mdm-472M-100e18/mdm-472M-100e18.safetensors
+Validating ...
+Val iter 0000:	NLL Bound 3.0005,	Top-K 2.9388,	Conf. Thresh 2.9430,	Top-K Margin 2.9473,	Block Top-K 2.9363,	Autoregressive 2.9262,	Counted Samples 50.0

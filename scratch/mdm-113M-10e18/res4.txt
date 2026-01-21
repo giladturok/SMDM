@@ -1,0 +1,13 @@
+A newer version of lightning is available (2.5.6). Would you like to upgrade? [Y/n]: Outputs will be saved to models/mdm_safetensors/mdm-113M-10e18
+{'model_name': 'Diff_LLaMA_113M', 'num_of_devices': 1, 'global_batch_size': 256, 'learning_rate': 0.0002, 'micro_batch_size': 8, 'max_step': 28066, 'warmup_steps': 280, 'log_step_interval': 10, 'eval_iters': 400, 'save_step_interval': 5000, 'eval_step_interval': 999999999999, 'weight_decay': 0.1, 'beta1': 0.9, 'beta2': 0.95, 'grad_clip': 1.0, 'decay_lr': True, 'min_lr': 2e-05, 'batch_size': 256, 'gradient_accumulation_steps': 32, 'warmup_iters': 8960, 'max_iters': 898112, 'lr_decay_iters': 898112, 'log_iter_interval': 320}
+Creating dataset from 252 files at data/slim_pajama/tokenized with prefix validation for split validation
+Loading model with {'org': 'Lightning-AI', 'name': 'Diff_LLaMA_113M', 'block_size': 2048, 'vocab_size': 32000, 'padding_multiple': 64, 'padded_vocab_size': 32000, 'n_layer': 12, 'n_head': 12, 'n_embd': 768, 'rotary_percentage': 1.0, 'parallel_residual': False, 'bias': False, 'n_query_groups': 12, 'shared_attention_norm': False, '_norm_class': 'FusedRMSNorm', 'norm_eps': 1e-05, '_mlp_class': 'LLaMAMLP', 'intermediate_size': 3072, 'condense_ratio': 1}
+Time to instantiate model: 0.34 seconds.
+Total parameters 162,418,176
+Loading checkpoint from models/mdm_safetensors/mdm-113M-10e18/mdm-113M-10e18.safetensors
+Validating ...
+Val iter 0000:	NLL Uniform 3.4428,	NLL Greedy 3.3763	NLL Block Greedy 3.3757	NLL Probability Margin 3.4030	NLL Greedy Cheating 3.1172	Counted Samples 8.0
+Val iter 0001:	NLL Uniform 3.4746,	NLL Greedy 3.4099	NLL Block Greedy 3.4076	NLL Probability Margin 3.4356	NLL Greedy Cheating 3.1336	Counted Samples 16.0
+Val iter 0002:	NLL Uniform 3.4976,	NLL Greedy 3.4431	NLL Block Greedy 3.4393	NLL Probability Margin 3.4606	NLL Greedy Cheating 3.1555	Counted Samples 24.0
+Val iter 0003:	NLL Uniform 3.4962,	NLL Greedy 3.4446	NLL Block Greedy 3.4422	NLL Probability Margin 3.4624	NLL Greedy Cheating 3.1666	Counted Samples 32.0
+Val iter 0004:	NLL Uniform 3.4748,	NLL Greedy 3.4231	NLL Block Greedy 3.4210	NLL Probability Margin 3.4421	NLL Greedy Cheating 3.1399	Counted Samples 40.0

@@ -26,6 +26,8 @@ class Tokenizer:
             self.bos_id = self.token_to_id(bos_token) if bos_token is not None else None
             self.eos_id = self.token_to_id(config["eos_token"])
         else:
+            vocabulary_path = checkpoint_dir / "tokenizer.model"
+            print(vocabulary_path)
             raise NotImplementedError
 
     @property

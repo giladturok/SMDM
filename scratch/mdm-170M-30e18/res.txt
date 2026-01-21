@@ -1,0 +1,17 @@
+A newer version of lightning is available (2.5.5). Would you like to upgrade? [Y/n]: Outputs will be saved to models/mdm_safetensors/mdm-170M-30e18
+{'model_name': 'Diff_LLaMA_170M', 'num_of_devices': 1, 'global_batch_size': 256, 'learning_rate': 0.0002, 'micro_batch_size': 8, 'max_step': 56132, 'warmup_steps': 561, 'log_step_interval': 10, 'eval_iters': 400, 'save_step_interval': 5000, 'eval_step_interval': 999999999999, 'weight_decay': 0.1, 'beta1': 0.9, 'beta2': 0.95, 'grad_clip': 1.0, 'decay_lr': True, 'min_lr': 2e-05, 'batch_size': 256, 'gradient_accumulation_steps': 32, 'warmup_iters': 17952, 'max_iters': 1796224, 'lr_decay_iters': 1796224, 'log_iter_interval': 320}
+Creating dataset from 252 files at data/slim_pajama/tokenized with prefix validation for split validation
+Loading model with {'org': 'Lightning-AI', 'name': 'Diff_LLaMA_170M', 'block_size': 2048, 'vocab_size': 32000, 'padding_multiple': 64, 'padded_vocab_size': 32000, 'n_layer': 18, 'n_head': 12, 'n_embd': 768, 'rotary_percentage': 1.0, 'parallel_residual': False, 'bias': False, 'n_query_groups': 12, 'shared_attention_norm': False, '_norm_class': 'FusedRMSNorm', 'norm_eps': 1e-05, '_mlp_class': 'LLaMAMLP', 'intermediate_size': 3072, 'condense_ratio': 1}
+Time to instantiate model: 0.17 seconds.
+Total parameters 219,050,496
+Loading checkpoint from models/mdm_safetensors/mdm-170M-30e18/mdm-170M-30e18.safetensors
+Validating ...
+Val iter 0000:	NLL Bound 3.1875,	Top-K 3.1587,	Conf. Thresh 3.1625,	Top-K Margin 3.1634,	Block Top-K 3.1581,	Autoregressive 3.1474,	Counted Samples 75.0
+Val iter 0001:	NLL Bound 3.1503,	Top-K 3.1181,	Conf. Thresh 3.1216,	Top-K Margin 3.1235,	Block Top-K 3.1183,	Autoregressive 3.1078,	Counted Samples 150.0
+Val iter 0002:	NLL Bound 3.1846,	Top-K 3.1416,	Conf. Thresh 3.1451,	Top-K Margin 3.1493,	Block Top-K 3.1422,	Autoregressive 3.1321,	Counted Samples 225.0
+Val iter 0003:	NLL Bound 3.1633,	Top-K 3.1162,	Conf. Thresh 3.1200,	Top-K Margin 3.1244,	Block Top-K 3.1163,	Autoregressive 3.1071,	Counted Samples 300.0
+Val iter 0004:	NLL Bound 3.1362,	Top-K 3.0833,	Conf. Thresh 3.0879,	Top-K Margin 3.0912,	Block Top-K 3.0831,	Autoregressive 3.0741,	Counted Samples 375.0
+Val iter 0005:	NLL Bound 3.1375,	Top-K 3.0848,	Conf. Thresh 3.0893,	Top-K Margin 3.0928,	Block Top-K 3.0846,	Autoregressive 3.0757,	Counted Samples 450.0
+Val iter 0006:	NLL Bound 3.1365,	Top-K 3.0815,	Conf. Thresh 3.0862,	Top-K Margin 3.0893,	Block Top-K 3.0813,	Autoregressive 3.0724,	Counted Samples 525.0
+Val iter 0007:	NLL Bound 3.1267,	Top-K 3.0782,	Conf. Thresh 3.0834,	Top-K Margin 3.0856,	Block Top-K 3.0782,	Autoregressive 3.0693,	Counted Samples 600.0
+Val iter 0008:	NLL Bound 3.1272,	Top-K 3.0785,	Conf. Thresh 3.0836,	Top-K Margin 3.0861,	Block Top-K 3.0785,	Autoregressive 3.0698,	Counted Samples 675.0
